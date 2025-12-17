@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Personal Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(180, 200, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(200, 220, 0, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(15, 15, 25, 0.85) 0%, rgba(20, 25, 15, 0.85) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(180, 200, 0, 0.2);
+            border-top: 3px solid rgba(180, 200, 0, 0.4);
+            color: white;
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(180, 200, 0, 0.1) 50%, 
+                transparent 100%);
+            animation: shimmer 8s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(50%); }
+        }
+
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 0.8rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(180, 200, 0, 0.3);
+            position: relative;
+        }
+
+        header p {
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            color: #b4c800;
+            font-weight: 500;
+            position: relative;
+        }
+
+        nav {
+            background: linear-gradient(to right, rgba(20, 20, 30, 0.7), rgba(25, 25, 20, 0.7));
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(180, 200, 0, 0.25);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0;
+            position: relative;
+        }
+
+        nav a {
+            color: #c4d000;
+            text-decoration: none;
+            padding: 1.3rem 2rem;
+            display: block;
+            transition: all 0.3s;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            border-right: 1px solid rgba(180, 200, 0, 0.15);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #b4c800;
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+
+        nav li:last-child a {
+            border-right: none;
+        }
+
+        nav a:hover {
+            background: rgba(180, 200, 0, 0.15);
+            color: #fff;
+        }
+
+        nav a:hover::after {
+            width: 80%;
+        }
+
+        section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            margin-bottom: 2.5rem;
+            font-size: 2.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-left: 4px solid #b4c800;
+            padding-left: 1rem;
+        }
+
+        #about p {
+            font-size: 1.1rem;
+            color: #c0c0c0;
+            font-weight: 400;
+        }
+
+        .experience-item, .education-item, .project-card, .contact-info, .headshot-container {
+            background: rgba(20, 25, 20, 0.4);
+            backdrop-filter: blur(15px);
+            padding: 2rem;
+            border: 1px solid rgba(180, 200, 0, 0.25);
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .experience-item:hover, .education-item:hover, .project-card:hover {
+            border-color: rgba(180, 200, 0, 0.4);
+            background: rgba(25, 30, 25, 0.5);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .experience-header, .education-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            background: rgba(40, 40, 60, 0.6);
+            border: 1px solid rgba(180, 200, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .company-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+        }
+
+        .company-logo-placeholder {
+            font-size: 0.7rem;
+            color: #666;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .experience-details, .education-details {
+            flex: 1;
+        }
+
+        .experience-item h3, .education-item h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #b4c800;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .job-title, .degree {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .date-range {
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .experience-item ul, .education-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-item li, .education-item li {
+            color: #b0b0b0;
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .experience-item li::before, .education-item li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #b4c800;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2.5rem;
+        }
+
+        .project-images {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: rgba(30, 35, 30, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 0.9rem;
+            border: 1px solid rgba(180, 200, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-content h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .project-content p {
+            color: #b0b0b0;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .see-more-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: rgba(180, 200, 0, 0.2);
+            border: 1px solid rgba(180, 200, 0, 0.4);
+            color: #b4c800;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+
+        .see-more-btn:hover {
+            background: rgba(180, 200, 0, 0.3);
+            border-color: rgba(180, 200, 0, 0.6);
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            background: rgba(180, 200, 0, 0.15);
+            backdrop-filter: blur(5px);
+            color: #d0e000;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid rgba(180, 200, 0, 0.3);
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: rgba(180, 200, 0, 0.25);
+            border-color: rgba(180, 200, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .resume-portfolio {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .resume-portfolio a {
+            flex: 1;
+            min-width: 250px;
+            color: #0a0a0a;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            padding: 1.5rem 2rem;
+            background: rgba(180, 200, 0, 0.85);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(180, 200, 0, 1);
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+            text-align: center;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .resume-portfolio a:hover {
+            background: rgba(180, 200, 0, 1);
+            box-shadow: 0 0 25px rgba(180, 200, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+            align-items: start;
+        }
+
+        .headshot-placeholder {
+            width: 100%;
+            aspect-ratio: 1;
+            background: rgba(30, 35, 30, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(180, 200, 0, 0.2);
+        }
+
+        .headshot-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .headshot-name {
+            font-family: 'Orbitron', sans-serif;
+            color: #b4c800;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-links a {
+            color: #c4d000;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 1rem 1.5rem;
+            background: rgba(180, 200, 0, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(180, 200, 0, 0.25);
+            letter-spacing: 1px;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-links a:hover {
+            background: rgba(180, 200, 0, 0.2);
+            border-color: rgba(180, 200, 0, 0.4);
+            color: #fff;
+        }
+
+        .contact-label {
+            font-weight: 700;
+            min-width: 80px;
+            color: #b4c800;
+        }
+
+        footer {
+            background: rgba(15, 15, 25, 0.8);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(180, 200, 0, 0.2);
+            color: #888;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 968px) {
+            .project-card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                border-right: none;
+                border-bottom: 1px solid rgba(180, 200, 0, 0.15);
+                padding: 1rem 1.5rem;
+            }
+
+            nav li:last-child a {
+                border-bottom: none;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .headshot-container {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .experience-header, .education-header {
+                flex-direction: column;
+            }
+
+            .company-logo {
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Chenyu Pan</h1>
+        <p>Aspring Electronics and Controls Engineer</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hello, I'm Chenyu! I'm passionate about electronics and control systems, but above all, I love creating things. I enjoy working on projects that challenge me and allow me to learn new technologies.</p>
+        <p style="margin-top: 1rem;">When I'm not coding, you can find me working out, exploring the world, or watching sports!</p>
+    </section>
+
+    <section id="experience">
+        <h2>Work Experience</h2>
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="company-logo">
+                    <!-- Replace with: <img src="images/company-logo.png" alt="Company"> -->
+                    <div class="company-logo-placeholder">Logo</div>
+                </div>
+                <div class="experience-details">
+                    <h3>Company Name</h3>
+                    <div class="job-title">Intern, Systems Engineering</div>
+                    <div class="date-range">Incoming January 2026</div>
+                </div>
+            </div>
+            <ul>
+                <li>Incoming Winter 2026, part of the Rail & Transit division and the Union Station Enhancement Project (USEP).</li>
+                <li>Providing support to system lifecycle development, integration, testing, and deployment activities, while conducting verification / validation of system requirements and design.</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="company-logo">
+                    <!-- Replace with: <img src="images/company-logo2.png" alt="Company"> -->
+                    <div class="company-logo-placeholder">Logo</div>
+                </div>
+                <div class="experience-details">
+                    <h3>Midnight Sun Solar Car Team</h3>
+                    <div class="job-title">Electrical and Firmware Team Member</div>
+                    <div class="date-range">December 2025 - Present</div>
+                </div>
+            </div>
+            <ul>
+                <li>Engineered a high-performance PCB for a 15V-to-5V DC/DC buck converter using Altium, incorporating optimal layout strategies to optimize impedance pathways and ensure stable output.</li>
+                <li>Installed and routed electrical harnesses for MSXVI, ensuring system integrity and adherence to rigorous safety standards for optimal vehicle performance.</li>
+                <li>Developed an interface using FreeRTOS in C to read from an ADS1115 ADC with an STM32.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2>Education</h2>
+        <div class="education-item">
+            <div class="education-header">
+                <div class="company-logo">
+                    <!-- Replace with: <img src="images/university-logo.png" alt="University"> -->
+                    <div class="company-logo-placeholder">Logo</div>
+                </div>
+                <div class="education-details">
+                    <h3>University Name</h3>
+                    <div class="degree">BASc - Bachelor of Applied Science, Electrical Engineering</div>
+                    <div class="date-range">Expected Graduation: 2030</div>
+                </div>
+            </div>
+            <ul>
+                <li>GPA: 3.7/4.0</li>
+                <li>Relevant Coursework: Programming (C++), Engineering Profession and Practice, Project Studio</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        
+        <div class="project-card">
+            <div class="project-images">
+                <div class="project-image">
+                    <!-- Replace with: <img src="images/project1-img1.jpg" alt="Project One Screenshot 1"> -->
+                    Project Image 1
+                </div>
+                <div class="project-image">
+                    <!-- Replace with: <img src="images/project1-img2.jpg" alt="Project One Screenshot 2"> -->
+                    Project Image 2
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Project One</h3>
+                <p>A comprehensive description of your first project. Explain the problem it solves, the technologies used, your role in development, and the impact it has had. Include technical details about the architecture, challenges faced, and solutions implemented.</p>
+                <a href="#" class="see-more-btn">See More →</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-images">
+                <div class="project-image">
+                    <!-- Replace with: <img src="images/project2-img1.jpg" alt="Project Two Screenshot 1"> -->
+                    Project Image 1
+                </div>
+                <div class="project-image">
+                    <!-- Replace with: <img src="images/project2-img2.jpg" alt="Project Two Screenshot 2"> -->
+                    Project Image 2
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Project Two</h3>
+                <p>A comprehensive description of your second project. Detail the technical stack, development process, key features, and measurable outcomes. Highlight any innovative approaches or solutions you implemented to overcome challenges.</p>
+                <a href="#" class="see-more-btn">See More →</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-images">
+                <div class="project-image">
+                    <!-- Replace with: <img src="images/project3-img1.jpg" alt="Project Three Screenshot 1"> -->
+                    Project Image 1
+                </div>
+                <div class="project-image">
+                    <!-- Replace with: <img src="images/project3-img2.jpg" alt="Project Three Screenshot 2"> -->
+                    Project Image 2
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Project Three</h3>
+                <p>A comprehensive description of your third project. Describe the purpose, target audience, technologies utilized, and the results achieved. Mention any collaboration with teams or stakeholders and lessons learned.</p>
+                <a href="#" class="see-more-btn">See More →</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills">
+            <span class="skill-tag">STM32</span>
+            <span class="skill-tag">ESP32</span>
+            <span class="skill-tag">C / C++</span>
+            <span class="skill-tag">PYTHON</span>
+            <span class="skill-tag">ALTIUM</span>
+            <span class="skill-tag">KICAD</span>
+            <span class="skill-tag">GIT</span>
+            <span class="skill-tag">AUTOCAD</span>
+        </div>
+    </section>
+
+    <section id="resume">
+        <h2>Resume & Portfolio</h2>
+        <div class="resume-portfolio">
+            <a href="path/to/your/resume.pdf" target="_blank">Download Resume</a>
+            <a href="path/to/your/portfolio.pdf" target="_blank">View Portfolio</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <div class="contact-container">
+            <div class="headshot-container">
+                <div class="headshot-placeholder">
+                    <!-- Replace with: <img src="images/headshot.jpg" alt="Your Name"> -->
+                    Your Photo
+                </div>
+                <div class="headshot-name">YOUR NAME</div>
+            </div>
+            <div class="contact-info">
+                <p style="margin-bottom: 1.5rem; color: #c0c0c0;">Feel free to reach out through any of the following channels:</p>
+                <div class="contact-links">
+                    <a href="mailto:chenyu.pan@uwaterloo.ca">
+                        <span class="contact-label">EMAIL:</span>
+                        <span>chenyu.pan@uwaterloo.ca</span>
+                    </a>
+                    <a href="https://github.com/chenyu-pnn" target="_blank">
+                        <span class="contact-label">GITHUB:</span>
+                        <span>github.com/chenyu-pnn</span>
+                    </a>
+                    <a href="https://linkedin.com/in/chenyu-pan" target="_blank">
+                        <span class="contact-label">LINKEDIN:</span>
+                        <span>linkedin.com/in/chenyu-pan</span>
+                    </a>
+                    <a href="tel:+6476397682">
+                        <span class="contact-label">PHONE:</span>
+                        <span>+1 (647)-639-7682</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Chenyu Pan. All rights reserved.</p>
+    </footer>
+</body>
+</html>
