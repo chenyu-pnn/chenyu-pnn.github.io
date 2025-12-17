@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Personal Website</title>
+    <title>Chenyu Pan's Personal Website</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -273,15 +273,34 @@
         }
 
         .project-card {
+            background: rgba(20, 25, 20, 0.4);
+            backdrop-filter: blur(15px);
+            padding: 0;
+            border: 1px solid rgba(180, 200, 0, 0.25);
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            border-color: rgba(180, 200, 0, 0.4);
+            background: rgba(25, 30, 25, 0.5);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-header {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 300px 1fr;
             gap: 2rem;
-            padding: 2.5rem;
+            padding: 2rem;
+            align-items: center;
         }
 
         .project-images {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
         }
 
@@ -305,48 +324,114 @@
             display: block;
         }
 
-        .project-content h3 {
+        .project-info h3 {
             font-family: 'Orbitron', sans-serif;
             color: #fff;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             font-size: 1.5rem;
             letter-spacing: 2px;
             font-weight: 700;
         }
 
-        .project-content p {
+        .project-oneliner {
             color: #b0b0b0;
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
         }
 
-        .see-more-btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background: rgba(180, 200, 0, 0.2);
-            border: 1px solid rgba(180, 200, 0, 0.4);
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-tag {
+            background: rgba(180, 200, 0, 0.15);
+            color: #d0e000;
+            padding: 0.4rem 1rem;
+            border: 1px solid rgba(180, 200, 0, 0.3);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .project-expanded {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            border-top: 0px solid rgba(180, 200, 0, 0.2);
+        }
+
+        .project-card.expanded .project-expanded {
+            max-height: 500px;
+            border-top: 1px solid rgba(180, 200, 0, 0.2);
+        }
+
+        .project-description {
+            padding: 2rem;
+            color: #b0b0b0;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .project-description ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .project-description li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.8rem;
+        }
+
+        .project-description li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
             color: #b4c800;
-            text-decoration: none;
+        }
+
+        .expand-indicator {
+            position: absolute;
+            bottom: 1rem;
+            right: 2rem;
+            color: #b4c800;
+            font-size: 0.9rem;
             font-weight: 600;
             letter-spacing: 1px;
             transition: all 0.3s;
-            text-transform: uppercase;
-            font-size: 0.95rem;
         }
 
-        .see-more-btn:hover {
-            background: rgba(180, 200, 0, 0.3);
-            border-color: rgba(180, 200, 0, 0.6);
+        .project-card:hover .expand-indicator {
             color: #fff;
-            transform: translateX(5px);
+        }
+
+        .project-card.expanded .expand-indicator::after {
+            content: '▲ COLLAPSE';
+        }
+
+        .project-card:not(.expanded) .expand-indicator::after {
+            content: '▼ EXPAND';
         }
 
         .skills {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .skills-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            color: #b4c800;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
             margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
         }
 
         .skill-tag {
@@ -452,7 +537,8 @@
             border: 1px solid rgba(180, 200, 0, 0.25);
             letter-spacing: 1px;
             font-size: 1.05rem;
-            display: flex;
+            display: grid;
+            grid-template-columns: 40px 80px 1fr;
             align-items: center;
             gap: 1rem;
         }
@@ -463,9 +549,13 @@
             color: #fff;
         }
 
+        .contact-icon {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
         .contact-label {
             font-weight: 700;
-            min-width: 80px;
             color: #b4c800;
         }
 
@@ -483,7 +573,7 @@
         }
 
         @media (max-width: 968px) {
-            .project-card {
+            .project-header {
                 grid-template-columns: 1fr;
             }
         }
@@ -539,7 +629,7 @@
 <body>
     <header>
         <h1>Chenyu Pan</h1>
-        <p>Aspring Electronics and Controls Engineer</p>
+        <p>Aspiring Electronics and Controls Engineer</p>
     </header>
 
     <nav>
@@ -557,7 +647,7 @@
     <section id="about">
         <h2>About Me</h2>
         <p>Hello, I'm Chenyu! I'm passionate about electronics and control systems, but above all, I love creating things. I enjoy working on projects that challenge me and allow me to learn new technologies.</p>
-        <p style="margin-top: 1rem;">When I'm not coding, you can find me working out, exploring the world, or watching sports!</p>
+        <p style="margin-top: 1rem;">When I'm not building something, you can find me working out, exploring the world, or watching sports!</p>
     </section>
 
     <section id="experience">
@@ -570,7 +660,7 @@
                 </div>
                 <div class="experience-details">
                     <h3>WSP in Canada</h3>
-                    <div class="job-title">Intern, Systems Engineering</div>
+                    <div class="job-title">Systems Engineering Intern</div>
                     <div class="date-range">Incoming January 2026</div>
                 </div>
             </div>
@@ -598,6 +688,25 @@
                 <li>Developed an interface using FreeRTOS in C to read from an ADS1115 ADC with an STM32.</li>
             </ul>
         </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="company-logo">
+                    <!-- Replace with: <img src="images/company-logo2.png" alt="Company"> -->
+                    <div class="company-logo-placeholder">Logo</div>
+                </div>
+                <div class="experience-details">
+                    <h3>City of Vaughan</h3>
+                    <div class="job-title">Data and Technology Intern</div>
+                    <div class="date-range">September 2024 - January 2025</div>
+                </div>
+            </div>
+            <ul>
+                <li>Analyzed and compiled 250+ spatial data points across 20+ public works datasets in ArcGIS Pro and AutoCAD to support infrastructure planning and data standardization for Corporate Asset Management.</li>
+                <li>Conducted city-wide field work using Field Maps to reevaluate 200+ road segments, supporting urban planning.</li>
+                <li>Integrated newly acquired GIS hardware scans into ArcGIS Online using Arcade to achieve sub-10 cm GPS accuracy, improving precision for location-sensitive assets by 80%.</li>
+            </ul>
+        </div>
     </section>
 
     <section id="education">
@@ -615,8 +724,8 @@
                 </div>
             </div>
             <ul>
-                <li>GPA: 3.7/4.0</li>
-                <li>Relevant Coursework: Programming (C++), Engineering Profession and Practice, Project Studio</li>
+                <li>cGPA: 3.7/4.0</li>
+                <li>Relevant Coursework: Engineering Profession and Practice, Programming (C++), Project Studio</li>
             </ul>
         </div>
     </section>
@@ -624,72 +733,141 @@
     <section id="projects">
         <h2>Projects</h2>
         
-        <div class="project-card">
-            <div class="project-images">
-                <div class="project-image">
-                    <!-- Replace with: <img src="images/project1-img1.jpg" alt="Project One Screenshot 1"> -->
-                    Project Image 1
+        <div class="project-card" onclick="this.classList.toggle('expanded')">
+            <div class="project-header">
+                <div class="project-images">
+                    <div class="project-image">
+                        <!-- Replace with: <img src="images/project1-img1.jpg" alt="Project One Screenshot 1"> -->
+                        Project Image 1
+                    </div>
+                    <div class="project-image">
+                        <!-- Replace with: <img src="images/project1-img2.jpg" alt="Project One Screenshot 2"> -->
+                        Project Image 2
+                    </div>
                 </div>
-                <div class="project-image">
-                    <!-- Replace with: <img src="images/project1-img2.jpg" alt="Project One Screenshot 2"> -->
-                    Project Image 2
+                <div class="project-info">
+                    <h3>VectorDrive 1.0 - Omni-Directional Drivetrain (WIP)</h3>
+                    <p class="project-oneliner">An innovative solution that revolutionizes the way users interact with technology.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">KiCAD</span>
+                        <span class="project-tag">STM32</span>
+                        <span class="project-tag">PCB Design</span>
+                        <span class="project-tag">ESC Design</span>
+                    </div>
                 </div>
             </div>
-            <div class="project-content">
-                <h3>Project One</h3>
-                <p>A comprehensive description of your first project. Explain the problem it solves, the technologies used, your role in development, and the impact it has had. Include technical details about the architecture, challenges faced, and solutions implemented.</p>
-                <a href="#" class="see-more-btn">See More →</a>
+            <div class="project-expanded">
+                <div class="project-description">
+                    <ul>
+                        <li>Developed a full-stack web application that reduced processing time by 60%</li>
+                        <li>Implemented real-time data synchronization using WebSocket technology</li>
+                        <li>Architected scalable microservices infrastructure deployed on AWS</li>
+                        <li>Led a team of 4 developers through agile development cycles</li>
+                        <li>Integrated third-party APIs and payment processing systems</li>
+                    </ul>
+                </div>
             </div>
+            <div class="expand-indicator"></div>
         </div>
 
-        <div class="project-card">
-            <div class="project-images">
-                <div class="project-image">
-                    <!-- Replace with: <img src="images/project2-img1.jpg" alt="Project Two Screenshot 1"> -->
-                    Project Image 1
+        <div class="project-card" onclick="this.classList.toggle('expanded')">
+            <div class="project-header">
+                <div class="project-images">
+                    <div class="project-image">
+                        <!-- Replace with: <img src="images/project2-img1.jpg" alt="Project Two Screenshot 1"> -->
+                        Project Image 1
+                    </div>
+                    <div class="project-image">
+                        <!-- Replace with: <img src="images/project2-img2.jpg" alt="Project Two Screenshot 2"> -->
+                        Project Image 2
+                    </div>
                 </div>
-                <div class="project-image">
-                    <!-- Replace with: <img src="images/project2-img2.jpg" alt="Project Two Screenshot 2"> -->
-                    Project Image 2
+                <div class="project-info">
+                    <h3>100W USB-C PD Sink Board</h3>
+                    <p class="project-oneliner">A cutting-edge platform that streamlines workflow and increases productivity by 40%.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Altium</span>
+                        <span class="project-tag">STM32</span>
+                        <span class="project-tag">PD Controllers</span>
+                        <span class="project-tag">PCB Design</span>
+                        <span class="project-tag">Power Electronics</span>
+                    </div>
                 </div>
             </div>
-            <div class="project-content">
-                <h3>Project Two</h3>
-                <p>A comprehensive description of your second project. Detail the technical stack, development process, key features, and measurable outcomes. Highlight any innovative approaches or solutions you implemented to overcome challenges.</p>
-                <a href="#" class="see-more-btn">See More →</a>
+            <div class="project-expanded">
+                <div class="project-description">
+                    <ul>
+                        <li>Built machine learning pipeline for predictive analytics with 92% accuracy</li>
+                        <li>Optimized data processing workflows reducing computation time by 40%</li>
+                        <li>Deployed containerized applications using Docker and Kubernetes</li>
+                        <li>Implemented automated testing and CI/CD pipelines</li>
+                        <li>Collaborated with data science team to integrate ML models into production</li>
+                    </ul>
+                </div>
             </div>
+            <div class="expand-indicator"></div>
         </div>
 
-        <div class="project-card">
-            <div class="project-images">
-                <div class="project-image">
-                    <!-- Replace with: <img src="images/project3-img1.jpg" alt="Project Three Screenshot 1"> -->
-                    Project Image 1
+        <div class="project-card" onclick="this.classList.toggle('expanded')">
+            <div class="project-header">
+                <div class="project-images">
+                    <div class="project-image">
+                        <!-- Replace with: <img src="images/project3-img1.jpg" alt="Project Three Screenshot 1"> -->
+                        Project Image 1
+                    </div>
+                    <div class="project-image">
+                        <!-- Replace with: <img src="images/project3-img2.jpg" alt="Project Three Screenshot 2"> -->
+                        Project Image 2
+                    </div>
                 </div>
-                <div class="project-image">
-                    <!-- Replace with: <img src="images/project3-img2.jpg" alt="Project Three Screenshot 2"> -->
-                    Project Image 2
+                <div class="project-info">
+                    <h3>HRVita - Wrist-Wearable Delirium Screener</h3>
+                    <p class="project-oneliner">An embedded system project combining hardware design with real-time data processing.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">ESP32</span>
+                        <span class="project-tag">C++</span>
+                        <span class="project-tag">Low Power</span>
+                        <span class="project-tag">System Design</span>
+                    </div>
                 </div>
             </div>
-            <div class="project-content">
-                <h3>Project Three</h3>
-                <p>A comprehensive description of your third project. Describe the purpose, target audience, technologies utilized, and the results achieved. Mention any collaboration with teams or stakeholders and lessons learned.</p>
-                <a href="#" class="see-more-btn">See More →</a>
+            <div class="project-expanded">
+                <div class="project-description">
+                    <ul>
+                        <li>Built machine learning pipeline for predictive analytics with 92% accuracy</li>
+                        <li>Optimized data processing workflows reducing computation time by 40%</li>
+                        <li>Deployed containerized applications using Docker and Kubernetes</li>
+                        <li>Implemented automated testing and CI/CD pipelines</li>
+                        <li>Collaborated with data science team to integrate ML models into production</li>
+                    </ul>
+                </div>
             </div>
+            <div class="expand-indicator"></div>
         </div>
     </section>
 
     <section id="skills">
         <h2>Skills</h2>
+        
+        <h3 class="skills-subtitle">Hardware</h3>
         <div class="skills">
-            <span class="skill-tag">STM32</span>
-            <span class="skill-tag">ESP32</span>
+            <span class="skill-tag">Microcontrollers (STM32 / ESP32 / Arduino)</span>
+            <span class="skill-tag">Oscilloscope</span>
+            <span class="skill-tag">Function Generator</span>
+            <span class="skill-tag">Hot Air Station / Rework</span>
+            <span class="skill-tag">DMM</span>
+            <span class="skill-tag">Soldering (SMD / THT)</span>
+            <span class="skill-tag">PCB Design</span>
+            <span class="skill-tag">Embedded Systems</span>
+        </div>
+
+        <h3 class="skills-subtitle">Software</h3>
+        <div class="skills">
             <span class="skill-tag">C / C++</span>
-            <span class="skill-tag">PYTHON</span>
-            <span class="skill-tag">ALTIUM</span>
-            <span class="skill-tag">KICAD</span>
-            <span class="skill-tag">GIT</span>
-            <span class="skill-tag">AUTOCAD</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Altium</span>
+            <span class="skill-tag">Git / GitHub</span>
+            <span class="skill-tag">AutoCAD</span>
         </div>
     </section>
 
@@ -709,26 +887,30 @@
                     <!-- Replace with: <img src="images/headshot.jpg" alt="Your Name"> -->
                     Your Photo
                 </div>
-                <div class="headshot-name">YOUR NAME</div>
+                <div class="headshot-name">CHENYU PAN</div>
             </div>
             <div class="contact-info">
                 <p style="margin-bottom: 1.5rem; color: #c0c0c0;">Feel free to reach out through any of the following channels:</p>
                 <div class="contact-links">
                     <a href="mailto:chenyu.pan@uwaterloo.ca">
+                        <span class="contact-icon">✉</span>
                         <span class="contact-label">EMAIL:</span>
-                        <span>chenyu.pan@uwaterloo.ca</span>
+                        <span>chenyu.pan@uwaterloo.ca/span>
                     </a>
                     <a href="https://github.com/chenyu-pnn" target="_blank">
+                        <span class="contact-icon">⚙</span>
                         <span class="contact-label">GITHUB:</span>
                         <span>github.com/chenyu-pnn</span>
                     </a>
                     <a href="https://linkedin.com/in/chenyu-pan" target="_blank">
+                        <span class="contact-icon">◉</span>
                         <span class="contact-label">LINKEDIN:</span>
                         <span>linkedin.com/in/chenyu-pan</span>
                     </a>
                     <a href="tel:+6476397682">
+                        <span class="contact-icon">☎</span>
                         <span class="contact-label">PHONE:</span>
-                        <span>+1 (647)-639-7682</span>
+                        <span>+1 (647) 639 7682</span>
                     </a>
                 </div>
             </div>
@@ -736,7 +918,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2025 Chenyu Pan. All rights reserved.</p>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
     </footer>
 </body>
 </html>
