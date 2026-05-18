@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chenyu Pan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <video id="bg-video" autoplay loop muted playsinline>
+    <source src="wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <div id="app">
+
+    <!-- ═══════════ HOME VIEW ═══════════ -->
+    <div id="view-home" class="view active">
+      <div class="home-layout">
+
+        <div class="home-left">
+          <header class="home-header">
+            <h1 class="home-title glitch" data-text="CHENYU PAN">CHENYU PAN</h1>
+            <div class="hud-pill" id="home-clock"></div>
+          </header>
+          <div class="blades" id="blades"></div>
+        </div>
+
+        <aside class="sidebar" id="sidebar"></aside>
+      </div>
+    </div>
+
+    <!-- ═══════════ SECTION VIEW ═══════════ -->
+    <div id="view-section" class="view">
+      <div class="sec-layout">
+        <div class="sec-topbar">
+          <button class="back-btn" onclick="goHome()">
+            <span>◂</span> BACK
+          </button>
+          <div class="sec-title-row" id="sec-title-row"></div>
+        </div>
+        <div class="sec-body" id="sec-body"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="data.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PUBLICATION — CHENYU PAN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="scanlines"></div>
+  <canvas id="bg-canvas"></canvas>
+
+  <div style="position:relative;z-index:10;overflow-y:auto;min-height:100vh;">
+    <div class="pub-page" id="pub-page"></div>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    /* Background grid */
+    (function(){
+      const cv=document.getElementById('bg-canvas'),ctx=cv.getContext('2d');
+      const G=52;let W,H,nodes=[],pars=[];
+      function resize(){
+        W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;
+        nodes=[];
+        for(let x=0;x<=W+G;x+=G)for(let y=0;y<=H+G;y+=G)
+          nodes.push({x,y,o:Math.random()*.22,s:.001+Math.random()*.0025});
+        pars=Array.from({length:18},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,r:Math.random()*1.2+.3,o:Math.random()*.25+.08}));
+      }
+      resize();window.addEventListener('resize',resize);
+      function frame(){
+        ctx.clearRect(0,0,W,H);
+        ctx.strokeStyle='rgba(255,129,0,0.045)';ctx.lineWidth=.5;
+        for(let x=0;x<=W;x+=G){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+        for(let y=0;y<=H;y+=G){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+        nodes.forEach(n=>{n.o+=n.s;if(n.o>.22||n.o<0)n.s*=-1;ctx.fillStyle=`rgba(255,129,0,${n.o})`;ctx.fillRect(n.x-1,n.y-1,2,2);});
+        pars.forEach(p=>{p.x=(p.x+p.vx+W)%W;p.y=(p.y+p.vy+H)%H;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,129,0,${p.o*.3})`;ctx.fill();});
+        requestAnimationFrame(frame);
+      }
+      frame();
+    })();
+
+    /* Render publication */
+    (function(){
+      const id  = parseInt(new URLSearchParams(window.location.search).get('id'), 10);
+      const pub = PORTFOLIO.publications.find(p => p.id === id);
+      const pg  = document.getElementById('pub-page');
+
+      if (!pub) {
+        pg.innerHTML = `<a class="back-btn" href="index.html"><span>◂</span> BACK</a><p style="margin-top:2rem;font-family:var(--hud);font-size:.7rem;color:var(--text-dim);letter-spacing:.15em;">ENTRY NOT FOUND</p>`;
+        return;
+      }
+      document.title = `${pub.venue} — CHENYU PAN`;
+
+      const links = Object.entries(pub.links).map(([k,v])=>
+        `<a class="pub-link" href="${v}">${k.toUpperCase()} ↗</a>`).join('');
+      const kws = pub.keywords.map(k => `<span class="kw">${k}</span>`).join('');
+
+      pg.innerHTML = `
+        <a class="back-btn" href="index.html"><span>◂</span> BACK TO PORTFOLIO</a>
+
+        <div class="pub-venue-pill" style="border-color:${pub.thumbColor}66;color:${pub.thumbColor};">
+          ${pub.venue} &nbsp;·&nbsp; ${pub.year}
+        </div>
+
+        <h1 class="pub-main-title" style="color:${pub.thumbColor};text-shadow:0 0 20px ${pub.thumbColor}44;">
+          ${pub.title.toUpperCase()}
+        </h1>
+
+        <div class="pub-authors">${pub.authors}</div>
+
+        <div class="pub-sec-label" style="color:${pub.thumbColor};">ABSTRACT</div>
+        <div class="pub-abstract" style="border-left-color:${pub.thumbColor}66;">${pub.abstract}</div>
+
+        <div class="pub-sec-label" style="color:${pub.thumbColor};">KEYWORDS</div>
+        <div class="pub-keywords">${kws}</div>
+
+        <div class="pub-sec-label" style="color:${pub.thumbColor};">ACCESS</div>
+        <div class="pub-links">${links}</div>
+      `;
+    })();
+  </script>
+</body>
+</html>
