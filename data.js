@@ -20,7 +20,7 @@ const PORTFOLIO = {
       title: "Systems Engineering Intern",
       org:   "WSP Canada",
       dates: "Jan 2026 – Apr 2026",
-      blurb: "Leading development of next-generation neural interface systems with focus on real-time adaptive algorithms.<br>Architected distributed compute pipelines reducing latency by 340 ms across 12 deployed edge nodes."
+      blurb: "Owned internal tools and scripts to improve engineering workflow, drafted stakeholder reports, and formulated APTA risk assessments."
     },
     {
       logoImg: "/images/logos/warg.jpg",   /* ← path to logo image e.g. "logos/warg.png" */
@@ -34,7 +34,7 @@ const PORTFOLIO = {
       title: "Data and Technology Intern",
       org:   "City of Vaughan",
       dates: "Sep 2024 – Jan 2025",
-      blurb: "Investigated adversarial robustness in deep learning systems under Prof. Chen's Intelligent Systems group.<br>Co-authored 2 papers on certified defenses; codebase adopted by 3 external research groups."
+      blurb: "Data analysis, Power Automate workflows, and GIS geometry improvements for infrastructure planning and asset management."
     }
   ],
 
