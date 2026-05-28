@@ -49,7 +49,6 @@ export const profile: Profile = {
   bio: 'Hi! I\'m a platform-level electrical hardware engineer currently interested in high-speed transmission and communications hardware.\n\nI\'m also a car enthusiast and fond of visual design. And a weightlifter ᕦ(ò_óˇ)ᕤ.\nI hope you enjoy my website :)',
   links: {
     email:    'c56pan@uwaterloo.ca',
-
     linkedin: 'https://linkedin.com/in/chenyu-pan',
     resume: '/resume.pdf',
   },

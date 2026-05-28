@@ -91,7 +91,10 @@ export function Hero() {
             {links.email    && <IconLink href={`mailto:${links.email}`}    title="Email"    external={false}><MailIcon /></IconLink>}
 
             {links.linkedin && <IconLink href={links.linkedin}             title="LinkedIn"             ><LinkedInIcon /></IconLink>}
-            {links.resume   && <IconLink href={links.resume}               title="Resume"   external={false}><ResumeIcon /></IconLink>}
+            {links.resume
+              ? <IconLink href={links.resume} title="Resume" external={false}><ResumeIcon /></IconLink>
+              : <span style={{ color: 'var(--fg-3)', display: 'flex', opacity: 0.4 }}><ResumeIcon /></span>
+            }
           </div>
 
           <p style={{ fontSize: '13px', color: 'var(--fg-2)', lineHeight: 1.85, maxWidth: '340px', whiteSpace: 'pre-line' }}>
