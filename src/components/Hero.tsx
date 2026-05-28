@@ -59,6 +59,7 @@ export function Hero() {
   return (
     <section
       id="hero"
+      className="hero-section"
       style={{
         height: '100svh',
         display: 'flex',
@@ -70,7 +71,7 @@ export function Hero() {
     >
       <HeroBackground />
       <div
-        className="container"
+        className="container hero-grid"
         style={{
           display: 'grid',
           gridTemplateColumns: '1fr 420px',

@@ -8,7 +8,7 @@ export function Projects() {
         <div className="rule" />
         <div className="label" style={{ margin: '16px 0' }}>02 / Projects</div>
 
-        <div style={{
+        <div className="projects-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, 1fr)',
           gap: '1px',

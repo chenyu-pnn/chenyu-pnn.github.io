@@ -28,6 +28,7 @@ export function LeftTimeline() {
 
   return (
     <div
+      className="left-timeline"
       style={{
         position: 'fixed',
         left: '10px',

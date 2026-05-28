@@ -74,7 +74,7 @@ export function Experience() {
                 }}
               >
                 {/* Image column — 25% width, 16:10 aspect ratio */}
-                <div style={{
+                <div className="experience-image-col" style={{
                   width: '25%',
                   aspectRatio: '16/10',
                   flexShrink: 0,
