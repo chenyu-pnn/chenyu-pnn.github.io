@@ -50,7 +50,7 @@ export const profile: Profile = {
   links: {
     email:    'c56pan@uwaterloo.ca',
     linkedin: 'https://linkedin.com/in/chenyu-pan',
-    resume: '/resume.pdf',
+    resume: '',
   },
   education: {
     logo: '/logos/uw.png',

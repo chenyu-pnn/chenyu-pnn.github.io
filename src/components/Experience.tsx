@@ -1,4 +1,4 @@
-import { experience } from '../data'
+import { experience, profile } from '../data'
 
 export function Experience() {
   return (
@@ -14,15 +14,17 @@ export function Experience() {
           marginBottom: '16px',
         }}>
           <div className="label">01 / Experience</div>
-          <a
-            href="/resume.pdf"
-            className="label"
-            style={{ color: 'var(--fg-2)', borderBottom: '1px solid var(--border-2)', paddingBottom: '2px', transition: 'color 0.2s, border-color 0.2s' }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--fg)'; e.currentTarget.style.borderColor = 'var(--fg)' }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--fg-2)'; e.currentTarget.style.borderColor = 'var(--border-2)' }}
-          >
-            Resume ↗
-          </a>
+          {profile.links?.resume && (
+            <a
+              href={profile.links.resume}
+              className="label"
+              style={{ color: 'var(--fg-2)', borderBottom: '1px solid var(--border-2)', paddingBottom: '2px', transition: 'color 0.2s, border-color 0.2s' }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--fg)'; e.currentTarget.style.borderColor = 'var(--fg)' }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--fg-2)'; e.currentTarget.style.borderColor = 'var(--border-2)' }}
+            >
+              Resume ↗
+            </a>
+          )}
         </div>
 
         {/* Timeline */}

@@ -93,7 +93,7 @@ export function Hero() {
             {links.linkedin && <IconLink href={links.linkedin}             title="LinkedIn"             ><LinkedInIcon /></IconLink>}
             {links.resume
               ? <IconLink href={links.resume} title="Resume" external={false}><ResumeIcon /></IconLink>
-              : <span style={{ color: 'var(--fg-3)', display: 'flex', opacity: 0.4 }}><ResumeIcon /></span>
+              : <span style={{ color: 'var(--fg-2)', display: 'flex' }}><ResumeIcon /></span>
             }
           </div>
 
