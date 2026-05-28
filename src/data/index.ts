@@ -24,7 +24,7 @@ export interface Profile {
   bio: string
   links?: {
     email?:    string
-    github?:   string
+
     linkedin?: string
     resume?:   string
   }
@@ -45,20 +45,18 @@ export interface Profile {
 
 // ── Replace with your actual content ─────────────────────────
 
-export const lastUpdated = 'May 2026'
-
 export const profile: Profile = {
-  bio: 'Hi! I\'m a platform-level electrical hardware engineer currently interested in high-speed transmission and communications hardware.\n\nI\'m also a car enthusiast and design engineering aficionado. And a weightlifter ᕦ(ò_óˇ)ᕤ.\nI hope you enjoy my website :)',
+  bio: 'Hi! I\'m a platform-level electrical hardware engineer currently interested in high-speed transmission and communications hardware.\n\nI\'m also a car enthusiast and fond of visual design. And a weightlifter ᕦ(ò_óˇ)ᕤ.\nI hope you enjoy my website :)',
   links: {
     email:    'c56pan@uwaterloo.ca',
-    github:   'https://github.com/chenyu-pnn',
+
     linkedin: 'https://linkedin.com/in/chenyu-pan',
     resume: '/resume.pdf',
   },
   education: {
     logo: '/logos/uw.png',
     name: 'University of Waterloo',
-    year: '2025',
+    year: '2030',
     detail: 'B.A.Sc. in Electrical Engineering',
   },
   work: {
@@ -113,7 +111,7 @@ export const projects: Project[] = [
     description:
       'A densely integrated flight controller intended for 4-in-1 ESCs featuring extensive I/O expansion and ExpressLRS RF, with an STM32 and ESP32 processor core.',
     tags: ['KiCad'],
-    // model: '/models/project-four.glb',
+
   },
 ]
 
