@@ -65,6 +65,7 @@ export function Experience() {
 
               {/* Entry box */}
               <div
+                className="experience-entry"
                 style={{
                   flex: 1,
                   border: '1px solid var(--border)',
