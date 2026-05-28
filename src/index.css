@@ -1,0 +1,268 @@
+@import "tailwindcss";
+
+/* ── Tokens (dark default) ───────────────── */
+:root {
+  --bg:         #080808;
+  --bg-2:       #111111;
+  --bg-3:       #1c1c1c;
+  --fg:         #f0f0f0;
+  --fg-2:       #808080;
+  --fg-3:       #484848;
+  --accent:     #7c5cfc;
+  --border:     #2c2c2c;
+  --border-2:   #3a3a3a;
+
+  --font-sans:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* ── Light mode ──────────────────────────── */
+:root[data-theme="light"] {
+  --bg:         #f8f8f8;
+  --bg-2:       #eeeeee;
+  --bg-3:       #e2e2e2;
+  --fg:         #0c0c0c;
+  --fg-2:       #585858;
+  --fg-3:       #b8b8b8;
+  --accent:     #6047e0;
+  --border:     #d0d0d0;
+  --border-2:   #b8b8b8;
+}
+
+@media (prefers-color-scheme: light) {
+  :root[data-theme="system"] {
+    --bg:         #f8f8f8;
+    --bg-2:       #eeeeee;
+    --bg-3:       #e2e2e2;
+    --fg:         #0c0c0c;
+    --fg-2:       #585858;
+    --fg-3:       #b8b8b8;
+    --accent:     #6047e0;
+    --border:     #d0d0d0;
+    --border-2:   #b8b8b8;
+  }
+}
+
+/* ── Reset ──────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-radius: 0 !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  background:
+    linear-gradient(150deg,
+      #0e0c14 0%,
+      #0a0c14 33%,
+      #0a0e0b 66%,
+      #100c10 100%
+    );
+  background-attachment: fixed;
+  min-height: 100%;
+}
+
+html[data-theme="light"] {
+  background:
+    linear-gradient(150deg,
+      #f8f6fc 0%,
+      #f4f6fc 36%,
+      #f4f8f5 70%,
+      #fcf4f8 100%
+    );
+}
+
+@media (prefers-color-scheme: light) {
+  html[data-theme="system"] {
+    background:
+      linear-gradient(150deg,
+        #f8f6fc 0%,
+        #f4f6fc 36%,
+        #f4f8f5 70%,
+        #fcf4f8 100%
+      );
+  }
+}
+
+body {
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: color 0.25s ease;
+}
+
+/* Film grain overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--accent); color: #fff; }
+
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--fg-3); }
+
+/* ── Typography ─────────────────────────── */
+.display {
+  font-family: var(--font-display);
+  font-size: clamp(72px, 12vw, 144px);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  line-height: 0.88;
+  color: var(--fg);
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 68px);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+/* ── Layout ─────────────────────────────── */
+#root { min-height: 100svh; }
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 14px; }
+}
+
+.rule {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+/* ── Markdown prose ─────────────────────── */
+.prose { max-width: 720px; color: var(--fg-2); font-size: 15px; line-height: 1.85; }
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  margin: 1.2em 0 0.35em;
+  line-height: 1.15;
+}
+.prose h1 { font-size: clamp(28px, 3vw, 40px); }
+.prose h2 { font-size: clamp(20px, 2.2vw, 28px); }
+.prose h3 { font-size: clamp(16px, 1.8vw, 22px); }
+.prose p  { margin: 0.85em 0; }
+.prose ul, .prose ol { margin: 0.85em 0; padding-left: 1.4em; }
+.prose li { margin: 0.3em 0; }
+.prose strong { color: var(--fg); font-weight: 600; }
+.prose em { font-style: italic; }
+.prose a  { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  padding: 1px 5px;
+}
+.prose pre {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  padding: 16px 20px;
+  overflow-x: auto;
+  margin: 1.2em 0;
+}
+.prose pre code { background: none; border: none; padding: 0; font-size: 13px; }
+.prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5em 0; }
+.prose img { max-width: 100%; border: 1px solid var(--border); }
+.prose blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: 1em;
+  color: var(--fg-3);
+  margin: 1.2em 0;
+  font-style: italic;
+}
+.prose .cols-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  max-width: 100%;
+}
+@media (max-width: 600px) {
+  .prose .cols-2 { grid-template-columns: 1fr; }
+}
+
+/* ── Hero card: ghost + glimmer ─────────────── */
+.hero-card-box {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    var(--border) 22%,
+    var(--border) 78%,
+    rgba(255, 255, 255, 0.10) 100%
+  ) 1;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.hero-card-divider {
+  position: relative;
+}
+
+.hero-card-divider::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    var(--border) 18%,
+    var(--border) 82%,
+    rgba(255, 255, 255, 0.07) 100%
+  );
+}
+
+/* ── 3D canvas wrapper ───────────────────── */
+.canvas-wrap {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
