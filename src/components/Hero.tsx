@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { profile } from '../data'
 import { HeroBackground } from './HeroBackground'
 
@@ -50,6 +51,52 @@ function IconLink({ href, title, external = true, children }: {
     >
       {children}
     </a>
+  )
+}
+
+function ScrollIndicator() {
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    const hero = document.getElementById('hero')
+    if (!hero) return
+    const obs = new IntersectionObserver(
+      ([entry]) => setVisible(entry.intersectionRatio > 0.85),
+      { threshold: [0.85, 1.0] }
+    )
+    obs.observe(hero)
+    return () => obs.disconnect()
+  }, [])
+
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        bottom: '28px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '6px',
+        opacity: visible ? 1 : 0,
+        transition: 'opacity 0.4s ease',
+        pointerEvents: 'none',
+        zIndex: 2,
+      }}
+    >
+      <span
+        className="label"
+        style={{ color: 'var(--fg-2)', letterSpacing: '0.2em', fontSize: '10px' }}
+      >
+        scroll
+      </span>
+      <div className="scroll-chevron">
+        <svg width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="var(--fg-2)" strokeWidth="1.5" strokeLinecap="square">
+          <polyline points="1,1 7,7 13,1" />
+        </svg>
+      </div>
+    </div>
   )
 }
 
@@ -155,6 +202,7 @@ export function Hero() {
 
         </div>
       </div>
+      <ScrollIndicator />
     </section>
   )
 }
