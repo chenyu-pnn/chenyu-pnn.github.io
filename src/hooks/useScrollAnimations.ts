@@ -15,13 +15,22 @@ export function useScrollAnimations() {
           gsap.to('#hero', { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }),
       })
 
-      gsap.set('#experience', { y: 64, opacity: 0 })
+      gsap.set('#work', { y: 64, opacity: 0 })
       ScrollTrigger.create({
-        trigger: '#experience',
+        trigger: '#work',
         start: 'top 88%',
         once: true,
         onEnter: () =>
-          gsap.to('#experience', { y: 0, opacity: 1, duration: 1.0, ease: 'expo.out' }),
+          gsap.to('#work', { y: 0, opacity: 1, duration: 1.0, ease: 'expo.out' }),
+      })
+
+      gsap.set('#photos', { y: 64, opacity: 0 })
+      ScrollTrigger.create({
+        trigger: '#photos',
+        start: 'top 88%',
+        once: true,
+        onEnter: () =>
+          gsap.to('#photos', { y: 0, opacity: 1, duration: 1.0, ease: 'expo.out' }),
       })
     })
 

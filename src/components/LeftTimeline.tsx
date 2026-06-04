@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
 
 const SECTIONS = [
-  { id: 'hero',       label: 'Intro'      },
-  { id: 'experience', label: 'Experience' },
-  { id: 'projects',   label: 'Projects'   },
+  { id: 'hero',   label: 'me'     },
+  { id: 'work',   label: 'work'   },
+  { id: 'photos', label: 'photos' },
 ]
 
 export function LeftTimeline() {
   const [active, setActive] = useState('hero')
-  const [hovered, setHovered] = useState<string | null>(null)
 
   useEffect(() => {
     const update = () => {
@@ -37,52 +36,52 @@ export function LeftTimeline() {
         zIndex: 50,
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: 'flex-start',
+        gap: 0,
       }}
     >
       {SECTIONS.map(({ id, label }, i) => (
-        <div key={id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-            {/* Hover label */}
-            <span
+        <div key={id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <button
+            onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })}
+            title={label}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '2px 0',
+            }}
+          >
+            <div
+              className="timeline-dot"
               style={{
-                position: 'absolute',
-                left: '16px',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '10px',
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                color: 'var(--fg-2)',
-                whiteSpace: 'nowrap',
-                opacity: hovered === id || active === id ? 1 : 0,
-                transition: 'opacity 0.25s',
-                pointerEvents: 'none',
-              }}
-            >
-              {label}
-            </span>
-
-            {/* Dot — clickable */}
-            <button
-              onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })}
-              onMouseEnter={() => setHovered(id)}
-              onMouseLeave={() => setHovered(null)}
-              title={label}
-              style={{
-                width: active === id ? '7px' : '4px',
-                height: active === id ? '7px' : '4px',
+                width: active === id ? '8px' : '5px',
+                height: active === id ? '8px' : '5px',
                 background: active === id ? 'var(--fg)' : 'var(--fg-3)',
-                border: 'none',
-                cursor: 'pointer',
-                padding: 0,
+                flexShrink: 0,
                 transition: 'all 0.3s ease',
-                display: 'block',
               }}
             />
-          </div>
+            <span style={{
+              fontFamily: 'var(--font-playful)',
+              fontSize: '15px',
+              letterSpacing: '0.02em',
+              whiteSpace: 'nowrap',
+              transition: 'all 0.25s',
+              ...(active === id
+                ? { background: 'var(--fg)', color: 'var(--bg)', padding: '0 5px', fontWeight: 600 }
+                : { color: 'var(--fg-3)', fontWeight: 400 }
+              ),
+            }}>
+              {label}
+            </span>
+          </button>
 
           {i < SECTIONS.length - 1 && (
-            <div style={{ width: '1px', height: '40px', background: 'var(--border)' }} />
+            <div style={{ width: '1px', height: '32px', background: 'var(--border)', marginLeft: '3.5px' }} />
           )}
         </div>
       ))}

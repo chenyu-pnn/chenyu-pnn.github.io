@@ -12,12 +12,13 @@ export interface Project {
 
 export interface Experience {
   company: string
-  image?: string     // 16:10 image for the left panel, e.g. '/images/company.jpg'
+  url?: string
+  image?: string
   role: string
   period: string
   description: string
   location?: string
-  current?: boolean  // marks the active / "now" position
+  current?: boolean
 }
 
 export interface Profile {
@@ -41,6 +42,13 @@ export interface Profile {
     focus: string
   }
   previous?: { name: string; role: string }[]
+}
+
+export interface Photo {
+  id: string
+  src: string
+  date: string   // e.g. "March 2024"
+  blurb: string
 }
 
 // ── Replace with your actual content ─────────────────────────
@@ -114,28 +122,35 @@ export const projects: Project[] = [
   },
 ]
 
+export const photos: Photo[] = [
+  // Add entries like: { id: 'photo-1', src: '/photos/IMG_001.jpg', date: 'May 2025', blurb: 'Quick caption here.' }
+]
+
 export const experience: Experience[] = [
   {
     company: 'WSP Canada',
+    url: 'https://www.wsp.com/en-ca',
     image: '/images/wsp.jpg',
     role: 'Systems Engineering Intern',
-    period: 'Jan 2026 - Apr 2026',
+    period: 'Jan 2026 – Apr 2026',
     description: 'Internal engineering tools, risk reports, and modelling for major Toronto metro projects, cutting turnaround time by up to 90%.',
     location: 'Toronto, ON',
   },
   {
     company: 'City of Vaughan',
+    url: 'https://www.vaughan.ca',
     image: '/images/vaughan.png',
     role: 'Data and Technology Intern',
-    period: 'Sep 2024 - Jan 2025',
+    period: 'Sep 2024 – Jan 2025',
     description: 'Data analysis, Power Automate workflows, and central GIS overhauls for infrastructure planning and asset management.',
     location: 'Vaughan, ON',
   },
   {
     company: 'Waterloo Aerial Robotics Group',
+    url: 'https://uwarg.com',
     image: '/images/warg.jpg',
     role: 'Electrical Designer',
-    period: 'Sep 2025 - Present',
+    period: 'Sep 2025 – Present',
     description: 'Electrical platform design and validation for competition UAVs from concept to prototyping.',
     location: 'Waterloo, ON',
   },

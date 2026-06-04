@@ -21,10 +21,12 @@ export function ProjectCard({ project }: { project: Project }) {
         if (Math.sqrt(dx * dx + dy * dy) > 4) dragRef.current = true
       }}
       onClick={() => { if (!dragRef.current) navigateTo(`/projects/${project.id}`) }}
+      className="card-glow"
       style={{
         background: hovered ? 'var(--bg-2)' : 'var(--bg)',
         display: 'flex',
         flexDirection: 'column',
+        height: '100%',
         cursor: 'pointer',
         transition: 'background 0.25s',
       }}
@@ -34,22 +36,22 @@ export function ProjectCard({ project }: { project: Project }) {
       {/* Visual */}
       <Suspense
         fallback={
-          <div style={{ aspectRatio: '16/9', background: 'var(--bg-2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ aspectRatio: '4/3', background: 'var(--bg-2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <span className="label">—</span>
           </div>
         }
       >
-        <div style={{ aspectRatio: '16/9' }}>
+        <div style={{ aspectRatio: '4/3', overflow: 'hidden', position: 'relative' }}>
           <ProjectModel modelUrl={project.model} modelZoom={project.modelZoom} imageUrl={project.image} title={project.title} />
         </div>
       </Suspense>
 
       {/* Info */}
-      <div style={{ padding: '24px', borderTop: '1px solid var(--border)', flex: 1, display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        {/* Index + year */}
+      <div style={{ padding: '14px 16px', flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        {/* Year + type */}
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--fg-3)', letterSpacing: '0.1em' }}>
-            {project.index}
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--fg-3)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            Project
           </span>
           <span className="label">{project.year}</span>
         </div>
@@ -59,7 +61,7 @@ export function ProjectCard({ project }: { project: Project }) {
           style={{
             fontFamily: 'var(--font-display)',
             fontStyle: 'italic',
-            fontSize: '22px',
+            fontSize: '18px',
             fontWeight: 400,
             letterSpacing: '-0.01em',
             lineHeight: 1.1,
@@ -73,7 +75,7 @@ export function ProjectCard({ project }: { project: Project }) {
         </h3>
 
         {/* Description */}
-        <p style={{ fontSize: '13px', color: 'var(--fg-2)', lineHeight: 1.75, flex: 1 }}>
+        <p style={{ fontSize: '12px', color: 'var(--fg-2)', lineHeight: 1.65, flex: 1 }}>
           {project.description}
         </p>
 

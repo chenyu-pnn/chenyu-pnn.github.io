@@ -56,23 +56,11 @@ export function ProjectModel({ modelUrl, modelZoom = 14, imageUrl, title }: Proj
 
   if (!modelUrl && imageUrl) {
     return (
-      <div
-        className="canvas-wrap"
-        style={{ aspectRatio: '4 / 3' }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
+      <div className="canvas-wrap" style={{ aspectRatio: '4 / 3' }}>
         <img
           src={imageUrl}
           alt={title || ''}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            display: 'block',
-            transition: 'transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-            transform: hovered ? 'scale(1.04)' : 'scale(1)',
-          }}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         />
       </div>
     )

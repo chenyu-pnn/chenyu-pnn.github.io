@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { profile } from '../data'
 import { HeroBackground } from './HeroBackground'
 
-// ── Social icons ────────────────────────────────────────────
 function MailIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="butt" strokeLinejoin="miter">
@@ -11,7 +10,6 @@ function MailIcon() {
     </svg>
   )
 }
-
 
 function LinkedInIcon() {
   return (
@@ -35,10 +33,7 @@ function ResumeIcon() {
 }
 
 function IconLink({ href, title, external = true, children }: {
-  href: string
-  title: string
-  external?: boolean
-  children: React.ReactNode
+  href: string; title: string; external?: boolean; children: React.ReactNode
 }) {
   return (
     <a
@@ -56,7 +51,6 @@ function IconLink({ href, title, external = true, children }: {
 
 function ScrollIndicator() {
   const [visible, setVisible] = useState(true)
-
   useEffect(() => {
     const hero = document.getElementById('hero')
     if (!hero) return
@@ -69,28 +63,12 @@ function ScrollIndicator() {
   }, [])
 
   return (
-    <div
-      style={{
-        position: 'absolute',
-        bottom: '28px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '6px',
-        opacity: visible ? 1 : 0,
-        transition: 'opacity 0.4s ease',
-        pointerEvents: 'none',
-        zIndex: 2,
-      }}
-    >
-      <span
-        className="label"
-        style={{ color: 'var(--fg-2)', letterSpacing: '0.2em', fontSize: '10px' }}
-      >
-        scroll
-      </span>
+    <div style={{
+      position: 'absolute', bottom: '28px', left: '50%', transform: 'translateX(-50%)',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px',
+      opacity: visible ? 1 : 0, transition: 'opacity 0.4s ease', pointerEvents: 'none', zIndex: 2,
+    }}>
+      <span className="label" style={{ color: 'var(--fg-2)', letterSpacing: '0.2em', fontSize: '10px' }}>scroll</span>
       <div className="scroll-chevron">
         <svg width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="var(--fg-2)" strokeWidth="1.5" strokeLinecap="square">
           <polyline points="1,1 7,7 13,1" />
@@ -102,127 +80,85 @@ function ScrollIndicator() {
 
 export function Hero() {
   const links = profile.links ?? {}
+  const allRoles = [
+    { role: profile.work.role, name: profile.work.name },
+    ...(profile.previous ?? []),
+  ]
 
   return (
-    <section
-      id="hero"
-      className="hero-section"
-      style={{
-        height: '100svh',
-        display: 'flex',
-        alignItems: 'center',
-        position: 'relative',
-        zIndex: 1,
-        overflow: 'hidden',
-      }}
-    >
+    <section id="hero" className="hero-section" style={{
+      height: '100svh', display: 'flex', alignItems: 'center',
+      position: 'relative', zIndex: 1, overflow: 'hidden',
+    }}>
       <HeroBackground />
-      <div
-        className="container hero-grid"
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 420px',
-          gap: '32px',
-          alignItems: 'center',
-          position: 'relative',
-          zIndex: 1,
-        }}
-      >
-        {/* ── Left: name + icons + bio ── */}
-        <div>
-          <div className="display" style={{ marginBottom: '-4px' }}>Chenyu</div>
-          <div className="display" style={{ marginBottom: '18px' }}>Pan</div>
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 
-          {/* Social icons */}
-          <div style={{ display: 'flex', gap: '6px', marginBottom: '16px' }}>
-            {links.email    && <IconLink href={`mailto:${links.email}`}    title="Email"    external={false}><MailIcon /></IconLink>}
+        {/* Name */}
+        <div style={{
+          fontFamily: 'var(--font-bebas)',
+          fontSize: 'clamp(72px, 12vw, 140px)',
+          lineHeight: 0.88,
+          letterSpacing: '0.02em',
+          color: 'var(--accent)',
+          marginBottom: '-2px',
+        }}>Chenyu</div>
+        <div style={{
+          fontFamily: 'var(--font-bebas)',
+          fontSize: 'clamp(72px, 12vw, 140px)',
+          lineHeight: 0.88,
+          letterSpacing: '0.02em',
+          color: 'var(--accent)',
+          marginBottom: '16px',
+        }}>Pan</div>
 
-            {links.linkedin && <IconLink href={links.linkedin}             title="LinkedIn"             ><LinkedInIcon /></IconLink>}
-            <IconLink href={links.resume ?? '#'} title="Resume" external={false}><ResumeIcon /></IconLink>
-          </div>
-
-          <p style={{ fontSize: '13px', color: 'var(--fg-2)', lineHeight: 1.85, maxWidth: '340px', whiteSpace: 'pre-line' }}>
-            {profile.bio}
-          </p>
+        {/* Icons */}
+        <div style={{ display: 'flex', gap: '6px', marginBottom: '16px' }}>
+          {links.email    && <IconLink href={`mailto:${links.email}`} title="Email" external={false}><MailIcon /></IconLink>}
+          {links.linkedin && <IconLink href={links.linkedin} title="LinkedIn"><LinkedInIcon /></IconLink>}
+          <IconLink href={links.resume ?? '#'} title="Resume" external={false}><ResumeIcon /></IconLink>
         </div>
 
-        {/* ── Right: focus + education / now + previous ── */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+        {/* Bullets — above bio */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '14px', maxWidth: '50%' }}>
 
-          {/* Box 1: focus (top) + education */}
-          <div className="hero-card-box">
-            <div className="hero-card-divider" style={{ padding: '10px 20px' }}>
-              <div className="label" style={{ marginBottom: '3px', color: 'var(--fg-2)' }}>Focus</div>
-              <div style={{ fontSize: '12px', color: 'var(--fg-2)' }}>{profile.work.focus}</div>
-            </div>
-            <div style={{ display: 'flex', gap: '14px', alignItems: 'center', padding: '15px 20px' }}>
-              <LogoBox item={profile.education} />
-              <div>
-                <div style={{ fontSize: '14px', fontWeight: 500, color: 'var(--fg)', marginBottom: '2px' }}>
-                  {profile.education.name}
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 400, color: 'var(--fg-2)', marginLeft: '8px' }}>
-                    {profile.education.year}
-                  </span>
-                </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--fg-2)', letterSpacing: '0.05em' }}>
-                  {profile.education.detail}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Box 2: now + previous */}
-          <div className="hero-card-box">
-            <div className={profile.previous?.length ? 'hero-card-divider' : undefined} style={{ padding: '15px 20px' }}>
-              <div className="label" style={{ marginBottom: '10px', color: 'var(--accent)' }}>Now</div>
-              <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
-                <LogoBox item={profile.work} />
-                <div>
-                  <div style={{ fontSize: '14px', fontWeight: 500, color: 'var(--fg)', marginBottom: '3px' }}>
-                    {profile.work.name}
-                  </div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--fg-2)', letterSpacing: '0.05em' }}>{profile.work.role}</div>
-                </div>
-              </div>
-            </div>
-            {profile.previous && profile.previous.length > 0 && (
-              <div style={{ padding: '13px 20px' }}>
-                <div className="label" style={{ marginBottom: '8px', color: 'var(--fg-2)' }}>Previous</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                  {profile.previous.map((p, i) => (
-                    <div key={i} style={{ display: 'flex', gap: '8px', alignItems: 'baseline' }}>
-                      <div style={{ fontSize: '13px', fontWeight: 500, color: 'var(--fg)' }}>{p.name}</div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--fg-2)', letterSpacing: '0.05em' }}>· {p.role}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          {/* Education */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--accent)' }}>›</span>
+            {profile.education.logo && (
+              <img src={profile.education.logo} alt="" width={14} height={14}
+                style={{ objectFit: 'contain', opacity: 0.7, flexShrink: 0 }} />
             )}
+            <span className="text-highlight" style={{ fontSize: '12px' }}>
+              {profile.education.name}
+            </span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--fg-2)' }}>
+              · {profile.education.detail} · {profile.education.year}
+            </span>
           </div>
 
+          {/* Experience roster */}
+          <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '0 2px' }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--accent)', marginRight: '4px' }}>›</span>
+            {allRoles.map((exp, i) => (
+              <span key={i} style={{ display: 'inline-flex', alignItems: 'baseline', gap: '3px' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--fg-2)' }}>{exp.role}</span>
+                <span style={{ fontSize: '10px', color: 'var(--fg-2)' }}>at</span>
+                <span className="text-highlight" style={{ fontSize: '12px' }}>{exp.name}</span>
+                {i < allRoles.length - 1 && (
+                  <span style={{ color: 'var(--fg-3)' }}>,</span>
+                )}
+              </span>
+            ))}
+          </div>
         </div>
+
+        {/* Bio */}
+        <p style={{ fontSize: '13px', color: 'var(--fg-2)', lineHeight: 1.85, maxWidth: '50%', whiteSpace: 'pre-line' }}>
+          {profile.bio}
+        </p>
+
       </div>
       <ScrollIndicator />
     </section>
-  )
-}
-
-function LogoBox({ item }: { item: { logo?: string } }) {
-  return (
-    <div style={{
-      width: '52px',
-      height: '52px',
-      flexShrink: 0,
-      border: '1px solid var(--border-2)',
-      background: 'var(--bg-3)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden',
-    }}>
-      {item.logo && (
-        <img src={item.logo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-      )}
-    </div>
   )
 }

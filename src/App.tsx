@@ -6,8 +6,8 @@ import { Background } from './components/Background'
 import { LeftTimeline } from './components/LeftTimeline'
 import { ThemeToggle } from './components/ThemeToggle'
 import { Hero } from './components/Hero'
-import { Experience } from './components/Experience'
-import { Projects } from './components/Projects'
+import { WorkSection } from './components/WorkSection'
+import { PhotoSection } from './components/PhotoSection'
 import { ProjectPage } from './components/ProjectPage'
 import { TransitionProvider } from './components/TransitionOverlay'
 import { useScrollAnimations } from './hooks/useScrollAnimations'
@@ -21,8 +21,8 @@ function MainPage() {
       <LeftTimeline />
       <main>
         <Hero />
-        <Experience />
-        <Projects />
+        <WorkSection />
+        <PhotoSection />
       </main>
     </div>
   )
